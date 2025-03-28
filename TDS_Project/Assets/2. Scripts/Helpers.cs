@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum GameState
 {
+    NONE,
     Run,
     Pause,
     GameOver

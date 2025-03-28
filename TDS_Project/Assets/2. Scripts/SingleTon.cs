@@ -36,7 +36,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         if (_instance != null && _instance != this)
         {
-            Debug.LogWarning($"{typeof(T).Name} 중복 인스턴스 발견! 삭제됨");
+            Helpers.LogWarning($"{typeof(T).Name} 중복 인스턴스 발견");
             Destroy(gameObject);
             return;
         }

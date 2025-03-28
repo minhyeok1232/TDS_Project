@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/BackGroundLoop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/BackGroundLoop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Box/Box.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Box/Box.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Hero/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Hero/Hero.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/Helpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/Helpers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/SingleTon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/SingleTon.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +31,8 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54724222b7684530a2810ae1eac94ec7176000/1e/0694cebd/SpriteRenderer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/Helpers.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/SingleTone.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/WheelRotator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -114,6 +112,7 @@
       <workItem from="1743061172484" duration="5000" />
       <workItem from="1743062076296" duration="43000" />
       <workItem from="1743062167633" duration="14374000" />
+      <workItem from="1743083885513" duration="5124000" />
     </task>
     <servers />
   </component>
