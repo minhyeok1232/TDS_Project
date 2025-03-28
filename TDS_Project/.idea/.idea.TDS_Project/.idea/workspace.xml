@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/ObjectPooler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/ObjectPooler.cs" afterDir="false" />
-    </list>
+    <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +109,7 @@
       <workItem from="1743061172484" duration="5000" />
       <workItem from="1743062076296" duration="43000" />
       <workItem from="1743062167633" duration="14374000" />
-      <workItem from="1743083885513" duration="19142000" />
+      <workItem from="1743083885513" duration="19404000" />
     </task>
     <servers />
   </component>
