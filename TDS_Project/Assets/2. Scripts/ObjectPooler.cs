@@ -20,6 +20,7 @@ public class ObjectPooler : MonoBehaviour
     [Header("ºÎ¸ð")]
     public Transform parent;         
     
+    // O(1)
     private Dictionary<string, Queue<GameObject>> poolDictionary;
 
     private void Awake()
