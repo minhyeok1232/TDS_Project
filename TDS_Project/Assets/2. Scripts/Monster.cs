@@ -9,10 +9,10 @@ public class Monster : MonoBehaviour
 {
     // =============================[ Monster Attributes ]=============================
     [Header("Monster Status")]
-    [Tooltip("최대 체력")]  public int   monsterHP            = 100;
-    [Tooltip("이동 속도")]  public float monsterSpeed         = 3.0f;
-    [Tooltip("점프 힘")]    public float monsterJumpForce     = 100.0f;
-    [Tooltip("점프 쿨타임")] public float monsterJumpDelayTime = 1.0f;
+    [Header("최대 체력")]  public int   monsterHP            = 100;
+    [Header("이동 속도")]  public float monsterSpeed         = 3.0f;
+    [Header("점프 힘")]    public float monsterJumpForce     = 100.0f;
+    [Header("점프 쿨타임")] public float monsterJumpDelayTime = 1.0f;
 
     [SerializeField, Tooltip("점프 가능 여부")]
     private bool canJump = true;

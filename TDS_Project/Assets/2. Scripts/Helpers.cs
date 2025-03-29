@@ -11,6 +11,16 @@ public enum GameState
     GameOver
 }
 
+public enum TagTypes
+{
+    NONE,
+    Hero,
+    Box,
+    Monster,
+    Truck,
+    Bullet
+}
+
 public static class Helpers
 {
     // Hero
