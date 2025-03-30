@@ -68,7 +68,6 @@ public class ObjectPooler : MonoBehaviour
         if (objectPool.Count > 0)
         {
             GameObject obj = objectPool.Dequeue();
-            obj.transform.SetParent(null);
             obj.SetActive(true);
             return obj;
         }
@@ -77,7 +76,6 @@ public class ObjectPooler : MonoBehaviour
             foreach (Pool pool in pools)
             {
                 GameObject newObj = instance.CreateNewObject(pool.prefab);
-                newObj.transform.SetParent(null);
                 newObj.SetActive(true);
                 return newObj;
             }
