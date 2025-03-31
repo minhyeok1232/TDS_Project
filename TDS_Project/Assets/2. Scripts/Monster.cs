@@ -26,14 +26,18 @@ public class Monster : MonoBehaviour
     [Header("점프 레이어 마스크")][SerializeField] private LayerMask obstacleTargetMask; 
     
 
-    private bool canJump = true;
-    private bool isGrounded = true;
-    private bool isAttacking = false;
+    private bool canJump = true;        // 점프 가능 여부
+    private bool isGrounded = true;     // 바닥 착지중 여부
+    private bool isAttacking = false;   // 공격중 여부
+    private bool pushBack = false;      // 뒤로 밀림 여부
     
     private Rigidbody2D    rb;
     private Animator       anim;
-    private Coroutine      jumpCooldownCoroutine = null;
     private WaitForSeconds jumpCooldownWait;
+    private WaitForSeconds backCooldownWait;
+    
+    private Coroutine      jumpCoroutine = null;
+    private Coroutine      backCoroutine = null;
 
     // =================================[ Life Cycle ]==================================
     void Awake()
@@ -43,6 +47,7 @@ public class Monster : MonoBehaviour
         
         // Caching
         jumpCooldownWait = new WaitForSeconds(monsterJumpDelayTime);
+        backCooldownWait = new WaitForSeconds(0.8f);
     }
 
     void Start()
@@ -55,32 +60,32 @@ public class Monster : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (isAttacking && !IsAnimationPlaying("Attack")) EndAttack();
+        if (isAttacking || pushBack) return;
+        
         Vector2 start = (Vector2)transform.position + Vector2.left * 0.7f;
         Vector2 direction = Vector2.left;
 
         RaycastHit2D hit = Physics2D.Raycast(start, direction, attackRange);
         
         // Debug!
-        Debug.DrawLine(start, start + (direction * monsterSpeed), Color.red, attackRange);
+        //Debug.DrawLine(start, start + (direction * attackRange), Color.red);
         
         // 앞의 Layer을 감지하여, Truck일 시 공격시도
         // 아닐 시 점프동작
-        if (!isAttacking)
+        if (hit)
         {
-            if (hit)
-            {
-                // hitLayer : Ray가 감지된 상대 Layer (목표는 truck)
-                // 비트연산으로 LayMask 체크
-                int hitLayer = hit.collider.gameObject.layer;
-                
-                if (DetectInFront(hitLayer, attackTargetMask)) StartAttack();
-                else if (DetectInFront(hitLayer, obstacleTargetMask) && isGrounded && canJump) Jump();
-                else Move();
-            }
-            else
-            {
-                Move();
-            }
+            // hitLayer : Ray가 감지된 상대 Layer (목표는 truck)
+            // 비트연산으로 LayMask 체크
+            int hitLayer = hit.collider.gameObject.layer;
+
+            if (DetectInFront(hitLayer, attackTargetMask)) StartAttack();
+            else if (DetectInFront(hitLayer, obstacleTargetMask) && isGrounded && canJump) Jump();
+            else Move();
+        }
+        else
+        {
+            Move();
         }
     }
 
@@ -88,11 +93,12 @@ public class Monster : MonoBehaviour
     void OnEnable()
     {
         canJump = true;
+        pushBack = false;
         
-        if (jumpCooldownCoroutine != null)
+        if (jumpCoroutine != null)
         {
-            StopCoroutine(jumpCooldownCoroutine);
-            jumpCooldownCoroutine = null;
+            StopCoroutine(jumpCoroutine);
+            jumpCoroutine = null;
         }
     }
     
@@ -101,10 +107,10 @@ public class Monster : MonoBehaviour
     {
         canJump = false;
 
-        if (jumpCooldownCoroutine != null)
+        if (jumpCoroutine != null)
         {
-            StopCoroutine(jumpCooldownCoroutine);
-            jumpCooldownCoroutine = null;
+            StopCoroutine(jumpCoroutine);
+            jumpCoroutine = null;
         }
     }
     
@@ -115,6 +121,19 @@ public class Monster : MonoBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+        
+        // 밟힘 감지 → 밀기
+        if (collision.collider.CompareTag("Monster") && collision.relativeVelocity.y < 0)
+        {
+            Rigidbody2D otherRb = collision.collider.GetComponent<Rigidbody2D>();
+
+            // 둘 다 점프 중일 때는 무시
+            if (!(rb.velocity.y > 0 && otherRb.velocity.y > 0))
+            {
+                // 살짝 딜레이 줘야할 수도!
+                PushBack();
+            }
         }
     }
 
@@ -129,13 +148,14 @@ public class Monster : MonoBehaviour
     // =================================[ Jump ]==================================
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, monsterJumpForce);
+        rb.velocity = new Vector2(-monsterSpeed * 1.2f, monsterJumpForce);
+  
         canJump = false;
 
-        if (jumpCooldownCoroutine != null)
-            StopCoroutine(jumpCooldownCoroutine);
+        if (jumpCoroutine != null)
+            StopCoroutine(jumpCoroutine);
 
-        jumpCooldownCoroutine = StartCoroutine(JumpDelayTime());
+        jumpCoroutine = StartCoroutine(JumpDelayTime());
     }
 
     IEnumerator JumpDelayTime()
@@ -175,9 +195,9 @@ public class Monster : MonoBehaviour
     }
 
     // 공격 동작
-    public void Attack()
+    public void OnAttack()
     {
-        
+        // 때리고 있는 대상에게 데미지 주는 로직
     }
     
     // 앞에 Layer 감지
@@ -204,5 +224,60 @@ public class Monster : MonoBehaviour
         }
 
         return false;
+    }
+     
+    //=================================[ Push Back ]==================================   
+    void PushBack()
+    {
+        if (pushBack) return;
+    
+        pushBack = true;
+        float monsterLength = GetComponent<Collider2D>().bounds.size.x;
+        Vector2 targetPos = rb.position + new Vector2(monsterLength, 0.0f);
+    
+        // 중복 실행 방지
+        if (backCoroutine != null) StopCoroutine(backCoroutine);
+        backCoroutine = StartCoroutine(SmoothMove(targetPos));
+        
+        
+        
+    
+        // 연쇄 밀림
+        Vector2 checkPos = transform.position + Vector3.right * monsterLength;
+        Collider2D[] hits = Physics2D.OverlapBoxAll(checkPos, new Vector2(1.0f, 1.0f), 0);
+    
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Monster") && hit.gameObject != this.gameObject)
+            {
+                hit.GetComponent<Monster>()?.PushBack();
+                break;
+            }
+        }
+    
+        StartCoroutine(ResetPushBack());
+    }
+    
+    IEnumerator SmoothMove(Vector2 target)
+    {
+        float duration = 0.3f;
+        float timer = 0.0f;
+        
+        Vector2 start = rb.position;
+    
+        while (timer < duration)
+        {
+            rb.MovePosition(Vector2.Lerp(start, target, timer / duration));
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    
+        rb.MovePosition(target);
+    }
+    
+    IEnumerator ResetPushBack()
+    {
+        yield return backCooldownWait;
+        pushBack = false;
     }
 }
