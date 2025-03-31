@@ -41,8 +41,6 @@ public static class Helpers
         public const int    Monster_Damage = 1;
         // 몬스터 체력
         public const int    Monster_HP = 100;
-        // 몬스터 스폰
-        public const float  Monster_SpawnTime = 1.0f;
     }
     
     

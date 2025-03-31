@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 // Monster 자체의 특징 
@@ -8,37 +9,79 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     // =============================[ Monster Attributes ]=============================
-    [Header("Monster Status")]
+    [Header("Monster")]
     [Header("최대 체력")]  public int   monsterHP            = 100;
     [Header("이동 속도")]  public float monsterSpeed         = 3.0f;
-    [Header("점프 힘")]    public float monsterJumpForce     = 100.0f;
-    [Header("점프 쿨타임")] public float monsterJumpDelayTime = 1.0f;
+    [Header("점프 힘")]    public float monsterJumpForce     = 5.0f;
+    [Header("점프 시간")]  public float jumpTimer            = 0.0f;
+    [Header("점프 쿨타임")] public float monsterJumpDelayTime = 2.0f;
 
-    [SerializeField, Tooltip("점프 가능 여부")]
+
+    
+    // =============================[ Attack Attributes ]=============================
+    [Header("Attack")]
+    [Header("공격 관련")]
+    [Header("공격 범위")] [SerializeField] private float attackRange = 0.2f;
+    [Header("공격 레이어 마스크")][SerializeField] private LayerMask attackTargetMask;
+    [Header("점프 레이어 마스크")][SerializeField] private LayerMask obstacleTargetMask; 
+    
+
     private bool canJump = true;
-    private Rigidbody2D rb;
-    private Coroutine jumpCoroutine = null;
+    private bool isGrounded = true;
+    private bool isAttacking = false;
+    
+    private Rigidbody2D    rb;
+    private Animator       anim;
+    private Coroutine      jumpCooldownCoroutine = null;
+    private WaitForSeconds jumpCooldownWait;
 
-    private WaitForSeconds _monsterJumpWaitTime;
-    
-    // 수정
-    private static Dictionary<int, List<GameObject>> blockingMonstersByLayer = new();
-    
-    
+    // =================================[ Life Cycle ]==================================
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         
         // Caching
-        _monsterJumpWaitTime = new WaitForSeconds(monsterJumpDelayTime);
-        
+        jumpCooldownWait = new WaitForSeconds(monsterJumpDelayTime);
+    }
 
+    void Start()
+    {
+        // 수동으로 Mask를 변경하였다.
+        // Layer 변경에 따라 수동으로 코드수정 X (코드로 직접 지정)
+        attackTargetMask = 1 << LayerMask.NameToLayer("Truck"); 
+        obstacleTargetMask = 1 << (gameObject.layer);
     }
     
     void FixedUpdate()
     {
-        if (!canJump) return; // 점프 중이 아닐 때만 이동하도록 조건 추가 가능
-        rb.velocity = new Vector2(-monsterSpeed, rb.velocity.y); // 왼쪽으로 이동
+        Vector2 start = (Vector2)transform.position + Vector2.left * 0.7f;
+        Vector2 direction = Vector2.left;
+
+        RaycastHit2D hit = Physics2D.Raycast(start, direction, attackRange);
+        
+        // Debug!
+        Debug.DrawLine(start, start + (direction * monsterSpeed), Color.red, attackRange);
+        
+        // 앞의 Layer을 감지하여, Truck일 시 공격시도
+        // 아닐 시 점프동작
+        if (!isAttacking)
+        {
+            if (hit)
+            {
+                // hitLayer : Ray가 감지된 상대 Layer (목표는 truck)
+                // 비트연산으로 LayMask 체크
+                int hitLayer = hit.collider.gameObject.layer;
+                
+                if (DetectInFront(hitLayer, attackTargetMask)) StartAttack();
+                else if (DetectInFront(hitLayer, obstacleTargetMask) && isGrounded && canJump) Jump();
+                else Move();
+            }
+            else
+            {
+                Move();
+            }
+        }
     }
 
     // SetActive(true)
@@ -46,10 +89,10 @@ public class Monster : MonoBehaviour
     {
         canJump = true;
         
-        if (jumpCoroutine != null)
+        if (jumpCooldownCoroutine != null)
         {
-            StopCoroutine(jumpCoroutine);
-            jumpCoroutine = null;
+            StopCoroutine(jumpCooldownCoroutine);
+            jumpCooldownCoroutine = null;
         }
     }
     
@@ -58,76 +101,108 @@ public class Monster : MonoBehaviour
     {
         canJump = false;
 
-        if (jumpCoroutine != null)
+        if (jumpCooldownCoroutine != null)
         {
-            StopCoroutine(jumpCoroutine);
-            jumpCoroutine = null;
+            StopCoroutine(jumpCooldownCoroutine);
+            jumpCooldownCoroutine = null;
         }
     }
     
+    
+    // =================================[ Collider ]==================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject other = collision.gameObject;
-        int myLayer = gameObject.layer;
-
-        if (!blockingMonstersByLayer.ContainsKey(myLayer))
-            blockingMonstersByLayer[myLayer] = new List<GameObject>();
-        
-        // 트럭과 부딪히면 막힌 리스트 시작
-        if (other.CompareTag("Truck"))
+        if (collision.collider.CompareTag("Ground"))
         {
-            // 1. Layer확인
-            // 2. gameObject(내 자신)을 해당 myLayer에 추가
-            if (!blockingMonstersByLayer[myLayer].Contains(gameObject))
-            {
-                blockingMonstersByLayer[myLayer].Add(gameObject);
-            }
-            return;
-        }
-
-        if (IsBlockingChainMonster())
-        {
-            if (MonsterCheck(other) && canJump)
-            {
-                Jump();
-            }
+            isGrounded = true;
         }
     }
-    
-    // 한번더 확인
-    bool IsBlockingChainMonster()
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        // myLayer : 현재 내 Layer
-        int myLayer = gameObject.layer;
-        
-        // Dictionary의 myLayer값 -> List형식으로 된 막힌 몬스터
-        // 내가(gameObject) 포함(Contains)이 되어있나? List형식으로 된 막힌 몬스터 중에서
-        return blockingMonstersByLayer.ContainsKey(myLayer) && blockingMonstersByLayer[myLayer].Contains(gameObject);
-    }
-    
-    bool MonsterCheck(GameObject obj)
-    {
-        return obj.CompareTag("Monster") && obj.layer == gameObject.layer && obj.activeSelf;
+        if (collision.collider.CompareTag("Ground"))
+            isGrounded = false;
     }
 
+    
+    
+    // =================================[ Jump ]==================================
     void Jump()
     {
-        // JumpDelayTime Coroutine이 실행중이면 금지 (메모리 절약)
-        if (jumpCoroutine != null) return;
-        
-        canJump = false;
         rb.velocity = new Vector2(rb.velocity.x, monsterJumpForce);
+        canJump = false;
 
-        // jumpCoroutine 상태 최신화
-        jumpCoroutine = StartCoroutine(JumpDelayTime());
+        if (jumpCooldownCoroutine != null)
+            StopCoroutine(jumpCooldownCoroutine);
+
+        jumpCooldownCoroutine = StartCoroutine(JumpDelayTime());
     }
 
     IEnumerator JumpDelayTime()
     {
-        yield return _monsterJumpWaitTime;
+        yield return jumpCooldownWait;
         canJump = true;
+    }
+    
+    // =================================[ Attack ]==================================
+    void Move()
+    {
+        if (IsAnimationPlaying("Attack"))
+        {
+            // 공격 중
+            rb.velocity = new Vector2(-(monsterSpeed - 2.0f), rb.velocity.y);
+        }
+        else
+        {
+            // 공격이 끝남
+            rb.velocity = new Vector2(-monsterSpeed, rb.velocity.y);
+        }
+    }
+    
+    
+    // =================================[ Attack ]==================================
+    public void StartAttack()
+    {
+        isAttacking = true;
+        rb.velocity = Vector2.zero;
+        anim.SetBool("IsAttacking", true);
+    }
 
-        // jumpCoroutine 상태 최신화
-        jumpCoroutine = null;
+    public void EndAttack()
+    {
+        isAttacking = false;
+        anim.SetBool("IsAttacking", false);
+    }
+
+    // 공격 동작
+    public void Attack()
+    {
+        
+    }
+    
+    // 앞에 Layer 감지
+    bool DetectInFront(int layer, LayerMask mask)
+    {
+        return ((1 << layer) & mask) != 0;
+    }
+    
+    // =================================[ Animation ]==================================
+    bool IsAnimationPlaying(string animName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(animName) == true)
+        {
+            // 0 ~ 1 Normalize
+            float animTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (animTime < 1.0f)
+            {
+                return true;
+            }
+            else if (animTime >= 1.0f)
+            {
+                return false;
+            }
+        }
+
+        return false;
     }
 }

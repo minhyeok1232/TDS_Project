@@ -83,7 +83,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 2
+  m_Constraints: 4
 --- !u!114 &8676712725635231225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,9 +98,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterHP: 100
   monsterSpeed: 3
-  monsterJumpForce: 100
+  monsterJumpForce: 5
+  jumpTimer: 0
   monsterJumpDelayTime: 1
-  canJump: 1
+  attackRange: 0.2
+  attackTargetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleTargetMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &1587282707785634469
 BoxCollider2D:
   m_ObjectHideFlags: 0
