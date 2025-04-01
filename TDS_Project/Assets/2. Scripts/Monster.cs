@@ -38,6 +38,8 @@ public class Monster : MonoBehaviour, IDamageable
     
     private Coroutine      jumpCoroutine = null;
     private Coroutine      backCoroutine = null;
+    
+    private Collider2D     currentAttackTarget = null;
 
     // =================================[ Life Cycle ]==================================
     void Awake()
@@ -54,7 +56,7 @@ public class Monster : MonoBehaviour, IDamageable
     {
         // 수동으로 Mask를 변경하였다.
         // Layer 변경에 따라 수동으로 코드수정 X (코드로 직접 지정)
-        attackTargetMask = 1 << LayerMask.NameToLayer("Truck"); 
+        attackTargetMask = 1 << LayerMask.NameToLayer("Box"); 
         obstacleTargetMask = 1 << (gameObject.layer);
     }
     
@@ -79,12 +81,17 @@ public class Monster : MonoBehaviour, IDamageable
             // 비트연산으로 LayMask 체크
             int hitLayer = hit.collider.gameObject.layer;
 
-            if (DetectInFront(hitLayer, attackTargetMask)) StartAttack();
+            if (DetectInFront(hitLayer, attackTargetMask))
+            {
+                currentAttackTarget = hit.collider;
+                StartAttack();
+            }
             else if (DetectInFront(hitLayer, obstacleTargetMask) && isGrounded && canJump) Jump();
             else Move();
         }
         else
         {
+            currentAttackTarget = null;
             Move();
         }
     }
@@ -198,6 +205,17 @@ public class Monster : MonoBehaviour, IDamageable
     public void OnAttack()
     {
         // 때리고 있는 대상에게 데미지 주는 로직
+        if (!currentAttackTarget) return;
+        
+        IDamageable target = currentAttackTarget.GetComponent<IDamageable>();
+        Debug.Log(currentAttackTarget.name);
+        
+        // Box, Player에 대한 데미지처리는 아직 함수 미수현 -> 나중에 처리
+        // if (target != null)
+        // {
+        //     int damage = monsterData.Damage;
+        //     target.TakeDamage(damage);
+        // }
     }
     
     // 앞에 Layer 감지
@@ -238,9 +256,6 @@ public class Monster : MonoBehaviour, IDamageable
         // 중복 실행 방지
         if (backCoroutine != null) StopCoroutine(backCoroutine);
         backCoroutine = StartCoroutine(SmoothMove(targetPos));
-        
-        
-        
     
         // 연쇄 밀림
         Vector2 checkPos = transform.position + Vector3.right * monsterLength;

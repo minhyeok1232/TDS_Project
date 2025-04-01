@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/BulletSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/BulletSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/IDamageable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/IDamageable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/MonsterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/MonsterSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/MonsterData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/MonsterData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +133,7 @@
       <workItem from="1743401386102" duration="11201000" />
       <workItem from="1743422674924" duration="10605000" />
       <workItem from="1743484134446" duration="19090000" />
-      <workItem from="1743504866838" duration="5411000" />
+      <workItem from="1743504866838" duration="8022000" />
     </task>
     <servers />
   </component>
