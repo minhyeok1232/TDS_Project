@@ -7,10 +7,10 @@ public class MonsterSpawner : MonoBehaviour
     public static MonsterSpawner instance;
 
     [Header("스폰 옵션")]
-    [SerializeField] private int currentMonsters;
+    public int currentMonsters;
     [SerializeField] private int maxSpawnMonsters;
-    [SerializeField] private const float minSpawnTimer = 1.3f;
-    [SerializeField] private const float maxSpawnTimer = 3.3f;
+    [SerializeField] private const float minSpawnTimer = 0.6f;
+    [SerializeField] private const float maxSpawnTimer = 1.9f;
     
     [Header("스폰 위치 지정")]
     [SerializeField] private Transform[] _spawnPos = new Transform[3];

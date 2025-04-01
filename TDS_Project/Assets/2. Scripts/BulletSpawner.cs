@@ -40,7 +40,24 @@ public class BulletSpawner : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // 우선 순위 1) 몬스터 충돌을 시키고, 인터페이스를 넘겨주게 한다.
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            // 관통X
+            IDamageable target = collision.gameObject.GetComponent<IDamageable>();
+            if (target != null)
+            {
+                // damage 값은 7~25로 랜덤값을 주고싶음!
+                int randomDamage = Random.Range(7, 26);
+                target.TakeDamage(randomDamage);
+            }
+
+            ReturnObject();
+        }
+        
+        
+        // 우선 순위 2) Ground에 충돌 시, Pool 반환
+        if (collision.gameObject.CompareTag("DestroyGround"))
         {
             ReturnObject();
         }

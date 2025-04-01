@@ -6,5 +6,5 @@ using UnityEngine;
 // Player, Box, Monster 전부 피격이 가능
 public interface IDamageable
 {
-    void TakeDamage(float amount);
+    void TakeDamage(int amount);
 }

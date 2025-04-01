@@ -9,6 +9,8 @@ TagManager:
   - Monster
   - Truck
   - Ground
+  - Bullet
+  - DestroyGround
   layers:
   - Default
   - TransparentFX

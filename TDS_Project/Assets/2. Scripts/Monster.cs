@@ -9,12 +9,12 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IDamageable
 {
     // =============================[ Monster Attributes ]=============================
-    [Header("Monster")]
-    [Header("최대 체력")]  public int   monsterHP            = 100;
-    [Header("이동 속도")]  public float monsterSpeed         = 3.0f;
-    [Header("점프 힘")]    public float monsterJumpForce     = 5.0f;
-    [Header("점프 시간")]  public float jumpTimer            = 0.0f;
-    [Header("점프 쿨타임")] public float monsterJumpDelayTime = 2.0f;
+    [Header("Monster")] 
+    [Header("몬스터 데이터")] public MonsterData monsterData;
+    [Header("몬스터 체력")] public int HP;   // HP는 각 몬스터들의 공유 데이터x (SO사용안함)
+    [Header("점프 힘")]      public float monsterJumpForce     = 5.0f;
+    [Header("점프 시간")]    public float jumpTimer            = 0.0f;
+    [Header("점프 쿨타임")]   public float monsterJumpDelayTime = 2.0f;
 
 
     
@@ -89,9 +89,11 @@ public class Monster : MonoBehaviour, IDamageable
         }
     }
 
-    // SetActive(true)
+    // SetActive(true) - 몬스터 생성 시 정보 Setting
     void OnEnable()
     {
+        HP = 100;
+        
         canJump = true;
         pushBack = false;
         
@@ -146,7 +148,7 @@ public class Monster : MonoBehaviour, IDamageable
     // =================================[ Jump ]==================================
     void Jump()
     {
-        rb.velocity = new Vector2(-monsterSpeed * 1.2f, monsterJumpForce);
+        rb.velocity = new Vector2(-monsterData.MoveSpeed * 1.2f, monsterJumpForce);
   
         canJump = false;
 
@@ -168,12 +170,12 @@ public class Monster : MonoBehaviour, IDamageable
         if (IsAnimationPlaying("Attack"))
         {
             // 공격 중
-            rb.velocity = new Vector2(-(monsterSpeed - 2.0f), rb.velocity.y);
+           rb.velocity = new Vector2(-(monsterData.MoveSpeed - 2.0f), rb.velocity.y);
         }
         else
         {
             // 공격이 끝남
-            rb.velocity = new Vector2(-monsterSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(-monsterData.MoveSpeed, rb.velocity.y);
         }
     }
     
@@ -280,8 +282,17 @@ public class Monster : MonoBehaviour, IDamageable
     }
     
     //=================================[ Damage Interface ]==================================   
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Helpers.Log("Interface 상속");
+        HP -= damage;
+        // 몬스터위에 데미지 출력 나오게 설정
+        if (HP <= 0) Dead();
+    }
+    
+    //=================================[ Dead Logic ]==================================    
+    public void Dead()
+    {
+        ObjectPooler.instance.ReturnObject("Monster", gameObject);
+        MonsterSpawner.instance.currentMonsters -= 1;
     }
 }

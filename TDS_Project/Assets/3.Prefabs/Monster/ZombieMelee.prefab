@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe19d46d333134da1ed61f4d3f59dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterHP: 100
-  monsterSpeed: 3
+  monsterData: {fileID: 11400000, guid: 7662b1fdda873884cb8fa23a1b06603c, type: 2}
+  HP: 100
   monsterJumpForce: 5
   jumpTimer: 0
   monsterJumpDelayTime: 1

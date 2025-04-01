@@ -7,9 +7,12 @@
     <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/BulletSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/BulletSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/IDamageable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/IDamageable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/ObjectPooler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/ObjectPooler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Hero/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Hero/Hero.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/MonsterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/MonsterSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +46,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/Helpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/MonsterData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/MonsterSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/WheelRotator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -86,10 +90,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1006124">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="286288">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1006124" />
+      <option name="pid" value="286288" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -133,7 +137,8 @@
       <workItem from="1743314805070" duration="4131000" />
       <workItem from="1743401386102" duration="11201000" />
       <workItem from="1743422674924" duration="10605000" />
-      <workItem from="1743484134446" duration="19056000" />
+      <workItem from="1743484134446" duration="19090000" />
+      <workItem from="1743504866838" duration="5411000" />
     </task>
     <servers />
   </component>
