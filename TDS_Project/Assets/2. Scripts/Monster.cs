@@ -6,7 +6,7 @@ using UnityEngine;
 // Monster 자체의 특징 
 // 가지고있는 정보
 [RequireComponent(typeof(Rigidbody2D))]
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IDamageable
 {
     // =============================[ Monster Attributes ]=============================
     [Header("Monster")]
@@ -123,15 +123,13 @@ public class Monster : MonoBehaviour
             isGrounded = true;
         }
         
-        // 밟힘 감지 → 밀기
+        // 밟히면 push back 처리
         if (collision.collider.CompareTag("Monster") && collision.relativeVelocity.y < 0)
         {
             Rigidbody2D otherRb = collision.collider.GetComponent<Rigidbody2D>();
-
-            // 둘 다 점프 중일 때는 무시
+            
             if (!(rb.velocity.y > 0 && otherRb.velocity.y > 0))
             {
-                // 살짝 딜레이 줘야할 수도!
                 PushBack();
             }
         }
@@ -279,5 +277,11 @@ public class Monster : MonoBehaviour
     {
         yield return backCooldownWait;
         pushBack = false;
+    }
+    
+    //=================================[ Damage Interface ]==================================   
+    public void TakeDamage(float damage)
+    {
+        Helpers.Log("Interface 상속");
     }
 }

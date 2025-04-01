@@ -32,10 +32,10 @@ public class ObjectPooler : MonoBehaviour
             return;
         }
 
-        InitMonsterPool();
+        InitPool();
     }
 
-    void InitMonsterPool()
+    void InitPool()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
         
@@ -75,9 +75,12 @@ public class ObjectPooler : MonoBehaviour
         {
             foreach (Pool pool in pools)
             {
-                GameObject newObj = instance.CreateNewObject(pool.prefab);
-                newObj.SetActive(true);
-                return newObj;
+                if (pool.tag == tag)
+                {
+                    GameObject newObj = instance.CreateNewObject(pool.prefab);
+                    newObj.SetActive(true);
+                    return newObj;
+                }
             }
         }
         return null;
