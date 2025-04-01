@@ -208,14 +208,12 @@ public class Monster : MonoBehaviour, IDamageable
         if (!currentAttackTarget) return;
         
         IDamageable target = currentAttackTarget.GetComponent<IDamageable>();
-        Debug.Log(currentAttackTarget.name);
         
-        // Box, Player에 대한 데미지처리는 아직 함수 미수현 -> 나중에 처리
-        // if (target != null)
-        // {
-        //     int damage = monsterData.Damage;
-        //     target.TakeDamage(damage);
-        // }
+        if (target != null)
+        {
+            int damage = monsterData.Damage;
+            target.TakeDamage(damage);
+        }
     }
     
     // 앞에 Layer 감지
