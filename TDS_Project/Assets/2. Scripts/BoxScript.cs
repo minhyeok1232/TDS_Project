@@ -24,6 +24,16 @@ public class BoxScript : MonoBehaviour, IDamageable
         
     }
     
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        // Ignore Collision
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            if (other.collider && GetComponent<Collider2D>())
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(),  other.collider);
+        }
+    }
+    
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
