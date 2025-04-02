@@ -206,7 +206,6 @@ public class Monster : MonoBehaviour, IDamageable
     {
         // 때리고 있는 대상에게 데미지 주는 로직
         if (!currentAttackTarget) return;
-        
         IDamageable target = currentAttackTarget.GetComponent<IDamageable>();
         
         if (target != null)

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00002b83653089d4ea20b8a76d95147f, type: 3}
   m_Name: Monster
   m_EditorClassIdentifier: 
-  damage: 3
-  moveSpeed: 3
+  damage: 12
+  moveSpeed: 5

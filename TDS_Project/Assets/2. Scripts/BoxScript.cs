@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BoxScript : MonoBehaviour, IDamageable
 {
-    // =============================[ Monster Attributes ]=============================
+    // =============================[ Box Attributes ]=============================
     [Header("Box")] 
     [Header("최대 체력")] public int maxHP = 100;
     [Header("현재 체력")] public int currentHp;             // 현재 체력
