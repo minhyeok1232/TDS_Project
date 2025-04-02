@@ -298,7 +298,20 @@ public class Monster : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         HP -= damage;
-        // 몬스터위에 데미지 출력 나오게 설정
+
+        // 데미지 텍스트 생성
+        GameObject obj = ObjectPooler.instance.GetObject("Damage");
+        
+        // 재미요소 추가
+        Vector3 offset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(0.9f, 1.2f), 0);
+        Vector3 pos = transform.position + offset;
+
+        obj.transform.position = pos;
+        obj.transform.rotation = transform.rotation;
+
+        DamageScript damageScript = obj.GetComponent<DamageScript>();
+        if (damageScript) damageScript.PrintDamage(damage, pos);
+
         if (HP <= 0) Dead();
     }
     

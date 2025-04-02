@@ -19,11 +19,6 @@ public class BoxScript : MonoBehaviour, IDamageable
         currentHp = maxHP;
     }
     
-    void Update()
-    {
-        
-    }
-    
     void OnCollisionEnter2D(Collision2D other)
     {
         // Ignore Collision
@@ -43,19 +38,20 @@ public class BoxScript : MonoBehaviour, IDamageable
             currentHp = 0;
         }
 
-        // 슬라이더 업데이트
-        if (panel != null)
+        if (panel != null && slider != null)
         {
             panel.SetActive(true);
-            slider.value = currentHp;
+            slider.value = (float)currentHp / maxHP;
         }
-        
-        // 몬스터위에 데미지 출력 나오게 설정
-        
     }
 
     public void Destroy()
     {
+        BoxColliderResize resize = transform.parent.GetComponent<BoxColliderResize>();
+        if (resize)
+        {
+            resize.ColliderReSize(transform.parent.childCount - 2);
+        }
         Destroy(gameObject);
     }
 }

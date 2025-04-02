@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Bullet
   - DestroyGround
+  - Damage
   layers:
   - Default
   - TransparentFX

@@ -108,6 +108,7 @@ MonoBehaviour:
   obstacleTargetMask:
     serializedVersion: 2
     m_Bits: 0
+  damageSpawner: {fileID: 3312858375857411060, guid: 72b07ac37632b474981d854bfa405da4, type: 3}
 --- !u!61 &1587282707785634469
 BoxCollider2D:
   m_ObjectHideFlags: 0

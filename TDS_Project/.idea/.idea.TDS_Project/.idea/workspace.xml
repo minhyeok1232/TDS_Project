@@ -6,7 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1.Scenes/MainScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/BoxScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/BoxScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/DamageSpawner.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/DamageSpawner.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3.Prefabs/Monster/ZombieMelee.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +43,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54724222b7684530a2810ae1eac94ec7176000/1e/0694cebd/SpriteRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54724222b7684530a2810ae1eac94ec7176000/3c/c5e3db43/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54724222b7684530a2810ae1eac94ec7176000/68/1e58ff16/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/BoxColliderResize.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/BoxScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/BulletSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/CameraScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/DamageScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/Helpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2. Scripts/HeroScript.cs" root0="FORCE_HIGHLIGHTING" />

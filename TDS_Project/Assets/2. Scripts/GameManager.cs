@@ -11,7 +11,6 @@ public class GameManager : Singleton<GameManager>
     // 한번만 실행을 하기 때문에 >> 외부에서 접근 금지
     protected override void OnAwake()
     {
-        Helpers.Log("GameManager 초기화");
         gameState = GameState.Run;
         Helpers.Log($"{gameState}");
     }
