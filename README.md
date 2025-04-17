@@ -6,7 +6,7 @@
 ---
 
 ## 🛠 개발 환경
-- **Engine** : Unity 2022.3.42f1
+- **Engine** : Unity 2022.3.42f1 
 - **IDE** : JetBrains Rider 2024.3
 
 ---
