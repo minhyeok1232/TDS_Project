@@ -1,12 +1,12 @@
 # 🎮 TDS_Project - Unity 2D Top-Down Shooter
-
+ 
 > Unity 기반 2D 게임 시스템 구현 과제  
 > [타워 데스티니 서바이브 (TDS)] 게임 스타일의 캐릭터/배경/풀링 시스템 구성
 
 ---
 
 ## 🛠 개발 환경
-- **Engine** : Unity 2022.3.42f1
+- **Engine** : Unity 2022.3.42f1 
 - **IDE** : JetBrains Rider 2024.3
 
 ---
