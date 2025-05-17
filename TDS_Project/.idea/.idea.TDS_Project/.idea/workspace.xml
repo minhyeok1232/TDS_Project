@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="53f7a4c3-fb96-43db-8b07-3b5a42be2a42" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TDS_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/BoxScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/BoxScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2. Scripts/Monster.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/7. ScriptableObject/Monster.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/7. ScriptableObject/Monster.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,15 +88,13 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="486508">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="486508" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -142,6 +137,9 @@
       <workItem from="1743504866838" duration="12463000" />
       <workItem from="1743564976759" duration="694000" />
       <workItem from="1743583103291" duration="1927000" />
+      <workItem from="1743941027967" duration="1655000" />
+      <workItem from="1743998821335" duration="701000" />
+      <workItem from="1744119783593" duration="1793000" />
     </task>
     <servers />
   </component>
